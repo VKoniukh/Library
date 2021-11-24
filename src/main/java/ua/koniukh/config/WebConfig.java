@@ -19,12 +19,12 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("ua.koniukh")
 @EnableWebMvc
-public class SpringConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
     @Autowired
-    public SpringConfig(ApplicationContext applicationContext) {
+    public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 

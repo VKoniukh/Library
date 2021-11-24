@@ -7,7 +7,9 @@ import ua.koniukh.model.Book;
 import ua.koniukh.model.dto.BookDTO;
 import ua.koniukh.service.BookService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,27 +28,43 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getCheckedOutBooks(Boolean bol) {
+    public List<BookDTO> getCheckedOutBooks() {
         return bookToBookDtoList(bookDAO.getCheckedOutBooks(false));
     }
 
     @Override
     public BookDTO bookToDto(Book book) {
-        BookDTO bookDto = BookDTO.builder()
-                .id(book.getId())
+        return BookDTO.builder()
                 .name(book.getName())
+                .dateAdded(book.getDateAdded().toString())
                 .available(book.isAvailable())
                 .build();
-        return bookDto;
     }
 
     @Override
-    public List<BookDTO> bookToBookDtoList(List<Book> books){
-        List<Book> allBookList = new ArrayList<>(bookDAO.getAllBooks());
+    public List<BookDTO> bookToBookDtoList(List<Book> books) {
+        List<Book> allBookList = new ArrayList<>(books);
         List<BookDTO> allBookDtoList = new ArrayList<>();
         for (Book book : allBookList) {
             allBookDtoList.add(bookToDto(book));
         }
         return allBookDtoList;
+    }
+
+    @Override
+    public Boolean isBookPresentByName(String name) {
+        return !bookDAO.isBookPresentByName(name);
+    }
+
+    @Override
+    public void save(BookDTO bookDTO) {
+        Date dateAdded = dateSetter(LocalDate.now());
+        bookDTO.setAvailable(true);
+        bookDAO.saveBook(bookDTO.getName(), dateAdded, bookDTO.isAvailable());
+    }
+
+    @Override
+    public Date dateSetter(LocalDate ld) {
+        return java.sql.Date.valueOf(ld);
     }
 }

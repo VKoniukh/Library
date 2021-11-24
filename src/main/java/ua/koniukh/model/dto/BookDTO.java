@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BookDTO {
-    private long id;
 
     private String name;
+
+    private String dateAdded;
 
     private boolean available;
 }
