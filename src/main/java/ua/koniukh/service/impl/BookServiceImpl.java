@@ -58,13 +58,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void save(BookDTO bookDTO) {
-        Date dateAdded = dateSetter(LocalDate.now());
+        Date dateAdded = LocalDateToDate(LocalDate.now());
         bookDTO.setAvailable(true);
         bookDAO.saveBook(bookDTO.getName(), dateAdded, bookDTO.isAvailable());
     }
 
     @Override
-    public Date dateSetter(LocalDate ld) {
+    public Date LocalDateToDate(LocalDate ld) {
         return java.sql.Date.valueOf(ld);
     }
 }

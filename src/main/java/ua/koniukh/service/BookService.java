@@ -8,17 +8,17 @@ import java.util.Date;
 import java.util.List;
 
 public interface BookService {
-    public List<BookDTO> getAllBooks();
+    List<BookDTO> getAllBooks();
 
-    public List<BookDTO> getCheckedOutBooks();
+    List<BookDTO> getCheckedOutBooks();
 
-    public List<BookDTO> bookToBookDtoList(List<Book> books);
+    List<BookDTO> bookToBookDtoList(List<Book> books);
 
-    public BookDTO bookToDto(Book book);
+    BookDTO bookToDto(Book book);
 
-    public Boolean isBookPresentByName(String name);
+    Boolean isBookPresentByName(String name);
 
-    public void save(BookDTO bookDTO);
+    void save(BookDTO bookDTO);
 
-    public Date dateSetter(LocalDate ld);
+    Date LocalDateToDate(LocalDate ld);
 }
