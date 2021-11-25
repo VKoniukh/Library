@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title> Person Information </title>
+    <meta charset="UTF-8">
+    <script>
+        function loadBooks() {
+            const request = new XMLHttpRequest();
+            request.open("GET", "http://localhost:8081/all_books", true);
+            request.onreadystatechange = function () {
+                if (request.readyState === 3 && request.status === 200) {
+                    const books = JSON.parse(request.responseText);
+                    const tbltop = `<table>
+			    <tr><th>Name</th><th>Date added</th><th>Available</th>`;
+                    let main = "";
+                    console.log(books);
+                    for (let i = 0; i < books.length; i++) {
+                        main += "<tr><td>" + books[i].name + "</td><td>" + books[i].dateAdded + "</td><td>" + books[i].available + "</td></tr>";
+                    }
+                    var tblbottom = "</table>";
+                    var tbl = tbltop + main + tblbottom;
+                    document.getElementById("bookInfo").innerHTML = tbl;
+                }
+            };
+            request.send();
+        }
+
+        function loadCheckedOutBooks() {
+            const request = new XMLHttpRequest();
+            request.open("GET", "http://localhost:8081/checked-out_books", true);
+            request.onreadystatechange = function () {
+                if (request.readyState === 3 && request.status === 200) {
+                    const books = JSON.parse(request.responseText);
+                    const tbltop = `<table>
+			    <tr><th>Name</th><th>Date added</th><th>Available</th>`;
+                    let main = "";
+                    console.log(books);
+                    for (let i = 0; i < books.length; i++) {
+                        main += "<tr><td>" + books[i].name + "</td><td>" + books[i].dateAdded + "</td><td>" + books[i].available + "</td></tr>";
+                    }
+                    var tblbottom = "</table>";
+                    var tbl = tbltop + main + tblbottom;
+                    document.getElementById("checkedOutBookInfo").innerHTML = tbl;
+                }
+            };
+            request.send();
+        }
+
+        window.onload = function () {
+            loadBooks();
+            loadCheckedOutBooks();
+        }
+    </script>
+
+    <a href="/new">Add new book</a>
+
+</head>
+<body>
+<div id="bookInfo"></div>
+<div id="checkedOutBookInfo"></div>
+</body>
+</html>
