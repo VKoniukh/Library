@@ -3,8 +3,6 @@ package ua.koniukh.service;
 import ua.koniukh.model.Book;
 import ua.koniukh.model.dto.BookDTO;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public interface BookService {
@@ -19,6 +17,4 @@ public interface BookService {
     Boolean isBookPresentByName(String name);
 
     void save(BookDTO bookDTO);
-
-    Date LocalDateToDate(LocalDate ld);
 }

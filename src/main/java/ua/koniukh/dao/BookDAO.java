@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.koniukh.model.Book;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class BookDAO {
         return books.isEmpty();
     }
 
-    public void saveBook(String name, Date dateAdded, Boolean available) {
+    public void saveBook(String name, LocalDate dateAdded, Boolean available) {
         jdbcTemplate.update("INSERT INTO Book VALUES (?, ?, ?)", name, dateAdded, available);
     }
 }
